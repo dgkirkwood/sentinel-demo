@@ -1,18 +1,7 @@
-terraform {
-  backend "remote" {
-    organization = "hashicorp-rachel"
-    workspaces {
-      name = "sentinel-demo1"
-    }
-  }
-}
-
 provider "aws" {
-  region                  = "us-west-2"
+  region                  = "ap-southeast-2"
   profile                 = "default"
-  shared_credentials_file = "~/.aws/credentials"
 }
-
 
 data "aws_ami" "ubuntu" {
   most_recent = true
@@ -33,7 +22,4 @@ data "aws_ami" "ubuntu" {
 resource "aws_instance" "web" {
   ami           = data.aws_ami.ubuntu.id
   instance_type = "t2.micro"
-  tags = {
-    Name = "Wolverine"
-  }
 }
